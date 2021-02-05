@@ -35,6 +35,11 @@ let gameStatusCheck = () => {
         // do something because a player won on the right-left diagonal!
         document.getElementById("game-status").innerHTML = `${currentPlayer} is the Winner!!!`
     }
+    let boardFull = true;
+    for(let i = 0; i < squareValues.length; i++) {
+        if(squareValues[i] !== "")
+    }
+
 }
 window.addEventListener("DOMContentLoaded", () => {
     document
@@ -56,17 +61,14 @@ window.addEventListener("DOMContentLoaded", () => {
             squareValues[squareIndex] = currentPlayer;
             console.log(squareValues);
 
-            //after each click check to see if it's a win
-            //
-            
-
             gameStatusCheck();
+
             if(currentPlayer === "x") {
                 currentPlayer = "o";
             } else {
                 currentPlayer = "x";
             }
-         
+
     });
 
 
