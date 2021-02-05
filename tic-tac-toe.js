@@ -2,6 +2,25 @@ let squareValues = ["", "", "", "", "", "", "", "", ""]
 let currentPlayer = "x"
 let gameStatus = "";
 let giveUpButton = document.getElementById("give-up");
+const saveGame = () => {
+    //Current player
+    //Game status (array)
+    localStorage.setItem("player", currentPlayer);
+    localStorage.setItem("game-status", JSON.stringify(squareValues));
+}
+const reloadGame = () => {
+    //Set current player from local storage
+    //Deserialize game status
+    //Set squareValues to equal deserialized game status
+    //Itterate through squareValues to set squares
+    currentPlayer = localStorage.getItem("player")
+    squareValues = JSON.parse(localStorage.getItem("game-status"));
+    squareValues.forEach((square, i) => {
+        if (square !== "") {
+            
+        }
+    });
+}
 
 let gameStatusCheck = () => {
 
@@ -60,6 +79,7 @@ let gameStatusCheck = () => {
     }
 }
 window.addEventListener("DOMContentLoaded", () => {
+    reloadGame();
     document
         .getElementById("tic-tac-toe-board")
         .addEventListener("click", (event) => {
@@ -89,7 +109,7 @@ window.addEventListener("DOMContentLoaded", () => {
             } else {
                 currentPlayer = "x";
             }
-
+            saveGame();
     });
 
     let newGameButton = document.getElementById("new-game");
@@ -104,6 +124,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         currentPlayer = "x";
         newGameButton.disabled = true;
+        saveGame();
     })
 
 
@@ -125,8 +146,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
          newGameButton.disabled = false;
          giveUpButton.disabled = true;
-
+        saveGame();
     })
-    //only enabled when game is in progress
 
 });
+
