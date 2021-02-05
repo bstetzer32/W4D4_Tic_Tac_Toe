@@ -1,4 +1,6 @@
 let squareValues = ["", "", "", "", "", "", "", "", ""]
+let player;
+let computer;
 let currentPlayer = "x"
 let gameStatus = "";
 let giveUpButton = document.getElementById("give-up");
@@ -25,7 +27,28 @@ const reloadGame = () => {
 
         }
     });
+};
+    //randomly generate number (0, 1)
+    // x = 1, 0 = o (player)
+    //assign num = to x or o
+const playerAssignment = () => {
+    let randomNumber = Math.floor(Math.random() * 2);
+    if (randomNumber = 0) {
+        currentPlayer = "o";
+    } else {
+        currentPlayer = "x";
+    }
+    let randomNumber 
 }
+    
+
+
+    //randomly generate number (from 0 to 8)
+    // randNum = index
+    //then filter thru squares, checking to see if they're empty
+    //if not full > append the x or o
+    //if full, recurse/tryagain
+
 
 let gameStatusCheck = () => {
 
@@ -159,15 +182,7 @@ window.addEventListener("DOMContentLoaded", () => {
     })
 
 
-    //randomly generate number (0, 1)
-    // x = 1, 0 = o (player)
-    //assign num = to x or o
 
-    //randomly generate number (from 0 to 8)
-    // randNum = index
-    //then filter thru squares, checking to see if they're empty
-    //if not full > append the x or o
-    //if full, recurse/tryagain
 
 
 });
