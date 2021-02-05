@@ -15,9 +15,14 @@ const reloadGame = () => {
     //Itterate through squareValues to set squares
     currentPlayer = localStorage.getItem("player")
     squareValues = JSON.parse(localStorage.getItem("game-status"));
+    console.dir(squareValues);
     squareValues.forEach((square, i) => {
         if (square !== "") {
-            
+            let div = document.getElementById(`square-${i}`);
+            let img = document.createElement("img");
+            img.src = `https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-${square}.svg`;
+            div.appendChild(img);
+
         }
     });
 }
@@ -79,7 +84,11 @@ let gameStatusCheck = () => {
     }
 }
 window.addEventListener("DOMContentLoaded", () => {
-    reloadGame();
+
+    if(localStorage.getItem("player")) {
+        reloadGame();
+    }
+
     document
         .getElementById("tic-tac-toe-board")
         .addEventListener("click", (event) => {
@@ -149,5 +158,16 @@ window.addEventListener("DOMContentLoaded", () => {
         saveGame();
     })
 
-});
 
+    //randomly generate number (0, 1)
+    // x = 1, 0 = o (player)
+    //assign num = to x or o
+
+    //randomly generate number (from 0 to 8)
+    // randNum = index
+    //then filter thru squares, checking to see if they're empty
+    //if not full > append the x or o
+    //if full, recurse/tryagain
+
+
+});
