@@ -1,6 +1,7 @@
 let squareValues = ["", "", "", "", "", "", "", "", ""]
 let currentPlayer = "x"
 let gameStatus = "";
+let giveUpButton = document.getElementById("give-up");
 
 let gameStatusCheck = () => {
 
@@ -42,15 +43,28 @@ let gameStatusCheck = () => {
             boardFull = false;
         }
     }
-    if (boardFull) {
+
+
+
+    if (boardFull && gameStatus === "") {
         gameStatus = `Draw Game!!`
     }
+
     document.getElementById("game-status").innerHTML = gameStatus;
+
+    if(gameStatus !== "") {
+        document
+            .getElementById("new-game")
+            .disabled = false;
+            giveUpButton.disabled = true;
+    }
 }
 window.addEventListener("DOMContentLoaded", () => {
     document
         .getElementById("tic-tac-toe-board")
         .addEventListener("click", (event) => {
+            document.getElementById("give-up").disabled = false;
+
             if (gameStatus !== "") return;
             let squareID = event.target.id;
 
@@ -79,7 +93,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     let newGameButton = document.getElementById("new-game");
-    
+
     newGameButton.addEventListener("click", (event) => {
         if (gameStatus === "") return;
         gameStatus = "";
@@ -88,11 +102,31 @@ window.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < 9; i++) {
             document.getElementById(`square-${i}`).innerHTML = "";
         }
+        currentPlayer = "x";
+        newGameButton.disabled = true;
     })
-    
 
 
 
-    let giveUpButton = document.getElementById("give-up")
+
+
+
+    giveUpButton.addEventListener("click", e => {
+        if(currentPlayer === "x") {
+            currentPlayer = "o";
+        } else {
+            currentPlayer = "x";
+        }
+        gameStatus = `${currentPlayer} is the Winner!!!`
+
+        document
+          .getElementById("game-status")
+          .innerHTML = gameStatus;
+
+         newGameButton.disabled = false;
+         giveUpButton.disabled = true;
+
+    })
+    //only enabled when game is in progress
 
 });
