@@ -33,15 +33,52 @@ const reloadGame = () => {
     //assign num = to x or o
 const playerAssignment = () => {
     let randomNumber = Math.floor(Math.random() * 2);
-    if (randomNumber = 0) {
-        currentPlayer = "o";
+    console.log(Math.floor(Math.random() * 2))
+    if (randomNumber === 0) {
+        computer = "o";
+        player = "x"
     } else {
-        currentPlayer = "x";
+        computer = "x"
+        player = "o";
     }
-    let randomNumber 
+    if (computer === "x") {
+        computerPlay();
+    }
 }
-    
 
+const computerPlay = () => {
+    if (gameStatus !== "") return;
+    let availableMoves = squareValues.map( (value, i) => {
+        if(value === "") {
+            return i;
+        }
+    })
+    if (availableMoves.length === 0) return;
+    //console.log(availableMoves);
+    let randomNum2 = Math.floor(Math.random() * availableMoves.length)
+
+    let selectedMove = availableMoves[randomNum2];
+    if (selectedMove === undefined) return computerPlay();
+
+    squareValues[selectedMove] = computer;
+    console.log(selectedMove);
+    let div = document.getElementById(`square-${selectedMove}`);
+    //console.log(div);
+    let img = document.createElement("img");
+    img.src = `https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-${currentPlayer}.svg`;
+    div.appendChild(img);
+
+
+    gameStatusCheck();
+
+            if(currentPlayer === "x") {
+                currentPlayer = "o";
+            } else {
+                currentPlayer = "x";
+            }
+            saveGame();
+
+}
 
     //randomly generate number (from 0 to 8)
     // randNum = index
@@ -110,6 +147,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     if(localStorage.getItem("player")) {
         reloadGame();
+    } else {
+        playerAssignment();
     }
 
     document
@@ -142,6 +181,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 currentPlayer = "x";
             }
             saveGame();
+            computerPlay();
     });
 
     let newGameButton = document.getElementById("new-game");
@@ -157,6 +197,7 @@ window.addEventListener("DOMContentLoaded", () => {
         currentPlayer = "x";
         newGameButton.disabled = true;
         saveGame();
+        playerAssignment();
     })
 
 
